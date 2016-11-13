@@ -1,0 +1,456 @@
+﻿*{ margin:0; padding:0;}
+body{
+	padding:0;
+	margin:0;
+	font: 12px/1.5 "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Microsoft YaHei,SimSun,sans-serif;
+
+}
+ul, ol, li{
+	list-style: none;
+}
+input{
+	outline:none;
+}
+.headerLogin{
+	margin:0 auto;
+	padding:0 0 0 0;
+	width:1000px;
+	min-width:1000px;
+	height:80px;
+	position: relative;
+	z-index: 1000000000;
+}
+.headerLogin .picBtns{
+    min-width:280px;
+	height:25px; 
+	z-index:100;
+	position:absolute;
+	right:0;
+	bottom:20px;
+}
+.headerLogin .picBtns a{
+    display:block;
+    width:50px;
+    float:left;
+    height:25px;
+    margin-right:5px;
+}
+#pic1{width:80px;}
+#pic2{width:50px;}
+#pic3{width:50px;}
+#pic4{width:45px;}
+#pic5{width:40px;}
+/*
+#pic0{
+	display:block;
+	float:left;
+	width:21px;
+	height:7px;
+	cursor: default;
+}
+#pic1{
+	display:block;
+	float:left;
+	margin-left:3px;
+	width:21px;
+	height:7px;
+	cursor: default;
+}
+
+.headerLogin .picBtns .show{
+	background: none repeat scroll 0 0 #ffffff;
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 7px;
+	line-height: 7px;
+	overflow: hidden;
+	
+}
+.headerLogin .picBtns .hide{
+    background-image: url("../images/welcome/btnSelect.png");
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 7px;
+	line-height: 7px;
+	overflow: hidden;
+	background-position: 0 0;
+	*background-color : transparent ;
+	*background-image : none ;
+	*filter : progid:DXImageTransform.Microsoft.AlphaImageLoader(src="../images/welcome/btnSelect.png", sizingMethod="crop") ;
+}
+*/
+.headerLogin .logo{
+    margin-top:20px;
+	width:302px;
+	height:60px;
+	margin-left:20px;
+	float:left;
+	background-image:url(../images/welcome/logo.png);
+	background-repeat:no-repeat;
+ }
+.headerLogin .notice{
+	float:right;
+	width:250px;
+	height:20px;
+    margin-right:150px;
+	margin-top:20px;
+	background-image:url(../images/welcome/login_icon.png);
+	background-repeat:no-repeat;
+	background-position: 10px -24px;
+ }
+ .headerLogin .resetPass{
+	width:280px;
+	height:20px;
+	line-height:20px;
+	float:right;
+	margin-top:55px;
+ }
+ .headerLogin .resetPass .resets{
+   display:block;
+   float:left;
+   width:80px;
+   height:20px;
+   background-image:url(../images/welcome/login_icon.png);
+   background-repeat:no-repeat;
+   background-position:-20px -6px;
+   outline: medium none;
+ }
+.headerLogin .resetPass .avatarx{
+   display:block;
+   float:left;
+   width:80px;
+   height:20px;
+   background-image:url(../images/welcome/login_icon.png);
+   background-repeat:no-repeat;
+   background-position:-111px -6px;
+   outline: medium none;
+}
+.headerLogin .resetPass .avatarBlog{
+   display:block;
+   float:left;
+   width:110px;
+   height:20px;
+   background-image:url(../images/welcome/login_icon.png);
+   background-repeat:no-repeat;
+   background-position:-191px -6px;
+   outline: medium none;
+}
+ /*
+  .headerLogin .mainBox {
+	position:relative;
+	width:1000px; 
+	height:420px;
+	z-index:99;
+	top:78px;
+  }
+  */
+.headerLogin .mainBox {
+    position:absolute;
+    width:1000px; 
+    height:500px;
+    z-index:1000000;
+    top:90px;
+    left:0;
+  }
+  
+ .headerLogin .loginBox{	
+    position:absolute;
+	top:63px;
+	right:-10px;
+	background-image:url(../images/welcome/loginBox.png);
+	background-repeat:no-repeat;
+	width:370px;
+	height:380px;
+	z-index:10000000;
+	
+ }
+ 
+ .loginBox label {
+    color: #b8bec4;
+    cursor: text;
+    font-size: 14px;
+    left: 2px;
+    line-height: 41px;
+    padding: 0 10px;
+    position: absolute;
+    top: 6px;
+    z-index: 100;
+	width：50px;
+}
+.loginBox ul{
+//	margin:36px 0 0 80px;
+    float:left;
+    margin:36px 0 0 40px;
+    display: inline;
+}
+.loginBox ul li{
+	display:block;
+	float:left;
+    position:relative;
+	top:0;
+	left:0;
+	width:301px;
+	height:40px;
+	margin-top:5px;
+	margin-bottom:25px;
+  }
+.loginBox ul li .text{
+	width:248px;
+	height:20px;
+	padding:10px 0 10px 8px;
+	line-height:20px;
+	font-size:14px;
+	font-weight:bold;
+	color:#207fc6;
+	border:0;
+	background:#EEF3F7;
+	border:1px solid #bac5d4;
+	border-radius: 3px 3px 3px 3px;
+	font-family: Tahoma,Helvetica,Arial,sans-serif;
+}
+.loginBox ul li .focus{
+    border-color: #499cda;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(73, 156, 218, 0.6);
+    outline: 0 none;
+	background-color:#F7FBFE;
+}
+.loginBox ul li .codeLi{
+	width:290px;
+	height:40px;
+	line-height:40px;
+	font-size:14px;
+	font-weight:bold;
+	color:#207fc6;
+	border:0;
+	background:#EEF3F7;
+	border:1px solid #bac5d4;
+	border-radius: 3px 3px 3px 3px;
+	margin-left:10px;  
+}
+.loginBox ul li .codeDiv{
+	width:128px;
+	height:40px;
+	float:left;
+}
+.loginBox ul li .code{
+	display:block;
+	float:left;
+	width:120px;
+	height:20px;
+	padding:10px 0 10px 8px;
+	line-height:20px;
+	font-size:14px;
+	font-weight:bold;
+	color:#207fc6;
+	border:0;
+	background:#EEF3F7;
+	border:1px solid #bac5d4;
+	border-radius: 3px 0px 0px 3px;
+	font-family: Tahoma,Helvetica,Arial,sans-serif;
+}
+.loginBox ul li .codeFocus{
+    border-color: #499cda;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(73, 156, 218, 0.6);
+    outline: 0 none;
+	background-color:#F7FBFE;
+}
+.loginBox ul li .img{
+    float:left;
+    margin-left:2px;
+	width:128px;
+	height:40px;
+	line-height:40px;
+	border:1px solid #bac5d4;
+	border-left:0;
+	border-radius: 0px 3px 3px 0px;
+	background-color:#D3E6F5;
+}
+.loginBox ul li .img .pic{
+	margin:10px 5px;
+	float:left;
+}
+.loginBox ul li .img a{
+    text-decoration:none;
+	color:#1366aa;
+}
+.loginBox ul li .img a:hover{
+	color:red;
+	text-decoration:underline;
+	}
+ .loginBox label {
+    color: #b8bec4;
+    cursor: text;
+    font-size: 14px;
+    left: 5px;
+    line-height: 39px;
+    padding: 0 5px;
+    position: absolute;
+    top: 2px;
+    z-index: 100;
+	width：50px;
+}
+.loginBox ul li .sub{
+	width:260px;
+    height: 52px;
+    font-size:14px;
+    background-image: url("../images/welcome/sub.jpg");
+    background-repeat: no-repeat;
+    cursor:pointer;
+    margin-left:4px;
+}
+.loginBox ul li .sub-bak{
+ 	background-image: url("../images/welcome/icon.png");
+    background-repeat: no-repeat;
+    display: inline-block;
+    width:306px;
+    height: 52px;
+	font-size:14px;
+	background-position: -2px -293px;
+	cursor:pointer;
+	margin-left:3px;
+}
+ .middle{
+	height: 500px;
+	min-width: 1000px;
+	overflow: hidden;
+	position: relative;
+	z-index: 0;
+	}
+.middle .leftBtn{
+	position:absolute;
+	width:50px; 
+	top:204px;
+	left:0;
+	height:90px;
+	background-image:url(../images/welcome/leftBtn.png);
+	background-repeat:no-repeat;
+	cursor:pointer;
+	z-index:200;
+}
+.middle .rightBtn{
+	position:absolute;
+	width:50px; 
+	top:204px;
+	right:0;
+	height:90px;
+	background-image:url(../images/welcome/rightBtn.png);
+	background-repeat:no-repeat;
+	cursor:pointer;
+	z-index:200;
+}	
+ .middle .main li {
+    background: none no-repeat scroll 50% 0 #FFFFFF;
+    height: 500px;
+    width: 100%;
+}
+ .footer{
+	width:100%;
+	height:60px;
+	line-height: 60px;
+	//border-top:1px solid #c4d4e5;
+	//border-bottom:1px solid #c4d4e5;
+	background: none repeat scroll 0 0 #f1f4f6;
+	//color: #9CACBD;
+	//text-align: center;
+  }
+ .footer .conts{
+  width:1000px;
+  height:40px;
+  padding-top:20px;
+  margin:0 auto;  
+}
+.footer .conts .blogs{
+ float:left;
+}
+.footer .conts .blogs a{
+ height:60px;
+ color:#666666;
+ padding:0 10px;
+ font-size:14px;
+ display:block;
+ line-height:60px;
+ float:left;
+ text-decoration: none;
+ }
+.footer .conts .blogs a.avatarx{
+  width:60px;
+  height:20px;
+  background-image:url(../images/welcome/login_icon.png);
+  background-repeat:no-repeat;
+  background-position:-111px -6px;
+  outline: medium none;
+}
+.footer .conts .blogs a.avatarBlog{
+  width:100px;
+  height:20px;
+  background-image:url(../images/welcome/login_icon.png);
+  background-repeat:no-repeat;
+  background-position:-183px -6px;
+  outline: medium none;
+} 
+.footer .conts .bq{
+  float:right;
+  width:350px;
+  height:20px;
+  background-image:url(../images/welcome/login_icon.png);
+  background-repeat:no-repeat;
+  background-position:-330px -6px;
+ 
+}
+ .noticeMsg{
+    margin:0 auto;
+	padding-top:10px;
+	width:1000px;
+	min-width:1000px;
+	height:70px;
+}
+.noticeMsg .msg{
+	float:left;
+	height:40px;
+	padding-top:5px;
+	line-height:30px;
+	font-size:14px;
+	color:#e58937;
+}
+.noticeMsg .msg span{
+	font-weight:bold;
+	color:#e58937;
+}
+ .footerBQ{
+	width:100%;
+	height:30px;
+	line-height: 30px;
+	border-top:1px solid #c4d4e5;
+	border-bottom:1px solid #c4d4e5;
+	background: none repeat scroll 0 0 #E0E9F3;
+	color: #9CACBD;
+	text-align: center;
+  }
+  
+ .loginBtns{
+    position:absolute;
+    bottom:85px;
+    left:25px;
+    width:500px;
+    height:51px;
+    z-index:10000000;
+ }
+ .lenovoID{
+    display:block;
+    float:left;
+    background-image:url(../images/welcome/login_btn.png);
+    background-repeat:no-repeat;
+    width:250px;
+    height:51px;
+    outline:none;
+ }
+ .lms{
+    display:block;
+    float:left;
+    background-image:url(../images/welcome/login_btn.png);
+    background-position:-250px -13px;
+    width:115px;
+    height:25px;
+    margin-top:15px;
+     outline:none;
+ }

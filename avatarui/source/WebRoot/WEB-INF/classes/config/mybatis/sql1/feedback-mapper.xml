@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace名字必须与Mapper接口名一致 -->
+<mapper namespace="com.lenovo.lps.push.marketing.monitor.mapper.FeedbackMapper">
+	<select id="feedbackList" resultType="java.util.ArrayList" resultMap="feedbackMap" >
+		select thedate,sum(col_0) as arrived,sum(col_1) as displayed,sum(col_2) as sysmsgclicked,sum(col_3) as 2nddisplayed,sum(col_4) as 2ndclicked,sum(col_5)  as downloaded,sum(col_6) as installed,sum(col_7) as activated from feedback where thedate<![CDATA[>]]>'20140423' group by thedate limit 0,1000
+	</select>
+	<!-- 	 
+	<select id="feedbackListByCityName" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="com.lenovo.lps.push.marketing.monitor.interceptor.Page">
+		select city_name,sum(col_0) as arrived from feedbackred where thedate&gt;='20140428' and thedate&lt;='20140505' group by city_name order by arrived
+	</select> 
+	<select id="feedbackListByCityName" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select #{groupByColumnName},sum(#{columnName}) as #{asColumnName} from feedbackred where thedate&gt;=#{startDate} and thedate&lt;=#{endDate} group by #{groupByColumnName} order by #{asColumnName} limit #{limit}, #{offset} 
+	</select> -->
+	<select id="feedbackRedListByMultiDimension" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select ${groupByColumnName} as ${groupByColumnName},sum(${columnName}) as ${asColumnName} from feedbackred where thedate&gt;=#{startDate} and thedate&lt;=#{endDate}
+		<if test="likeValue != null ">  
+        	and ${groupByColumnName} like #{likeValue}
+	    </if>
+		 group by ${groupByColumnName} order by ${asColumnName} desc limit #{limit}, #{offset} 
+	</select>
+	<select id="feedbackRedAll" resultType="string" parameterType="map">
+		select sum(${columnName}) as sum from feedbackred where thedate&gt;=#{startDate} and thedate&lt;=#{endDate}
+	</select>
+	
+	<select id="feedbacRedkListForTrendData" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select thedate,sum(${columnName}) as ${asColumnName} from feedbackred where thedate&gt;=#{startDate} and thedate&lt;=#{endDate} and ${groupByColumnName}=#{cityName} group by thedate order by thedate limit 0, #{offset} 
+	</select> 
+	<!--  
+	<select id="feedbacRedkListForTrendData" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select thedate,sum(col_0) as arrived from feedbackred where thedate&gt;='20140429' and thedate&lt;='20140505' and city_name='nil' group by thedate limit 0, 7 
+	</select> -->
+	
+	<!-- feedback overview group by Gu Lei -->
+	<select id="getDateColumnListInDateRange" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">		
+		select thedate as thedate, sum(${columnName}) as ${asColumnName} from feedback where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+		<if test="pid != null and pid != ''">  
+        	and pid = #{pid}
+		</if>
+		<if test="adid != null and adid != ''">  
+        	and ad_id = #{adid}
+		</if>
+		group by thedate order by thedate limit 0, 30
+	</select>
+	<select id="getHourColumnListInDateRange" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select hour as hour, sum(${columnName}) as ${asColumnName} from feedback where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} 
+		<if test="pid != null and pid != '' ">  
+        	and pid = #{pid}
+		</if>
+		<if test="adid != null and adid != ''">  
+        	and ad_id = #{adid}
+		</if>
+		group by hour order by hour limit 0, 24
+	</select>
+	<select id="getFeedbackListInDateRange" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select thedate as thedate, sum(col_0) as arrived, sum(col_1) as displayed, sum(col_2) as sysmsgclicked, sum(col_3) as 2nddisplayed, sum(col_4) 
+		as 2ndclicked, sum(col_5) as downloaded, sum(col_6) as installed, sum(col_7) as activated from feedback where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+		<if test="pid != null and pid != '' ">  
+       		and pid = #{pid}
+		</if>
+		<if test="adid != null and adid != '' ">  
+        	and ad_id = #{adid}
+		</if>
+		group by thedate order by ${sortOrderBy} ${sortRule} limit ${limit}, ${offset}
+	</select>
+	
+	<select id="getFeedbackErrorPvListByResult"  resultType="java.util.List" resultMap="feedbackMap" parameterType="map">
+		select result as result, sum(records) as sum from error where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and type= #{type} group by result order by sum desc limit #{offset}, #{rows} 
+	</select>
+	<select id="getFeedbackErrorPvTotalInDateRange" resultType="double" parameterType="map">
+		select sum(records) as sum from error where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and type= #{type}
+	</select>
+	<select id="feedbackErrorPvListForTrendData" resultType="java.util.List" resultMap="feedbackMap" parameterType="map">
+		select thedate, sum(records) as sum from error where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result=#{result} and type= #{type} group by thedate limit 0, #{rows} 
+	</select>
+	
+	<select id="getFeedbackErrorUvListByResult"  resultType="java.util.List" resultMap="feedbackMap" parameterType="map">
+		select result as result, dist(pid) as sum from error where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and type= #{type} group by result order by sum desc limit #{offset}, #{rows} 
+	</select>
+	<select id="getFeedbackErrorUvTotalInDateRange" resultType="double" parameterType="map">
+		select dist(pid) as sum from error where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and type= #{type} group by 111
+	</select>
+	<select id="feedbackErrorUvListForTrendData" resultType="java.util.List" resultMap="feedbackMap" parameterType="map">
+		select thedate, dist(pid) as sum from error where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result=#{result} and type= #{type} group by thedate limit 0, #{rows} 
+	</select>
+	
+	<select id="getFeedbackListInDateRangeExclude3Cols" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select thedate as thedate, sum(col_3) as 2nddisplayed, sum(col_4) 
+		as 2ndclicked, sum(col_5) as downloaded, sum(col_6) as installed, sum(col_7) as activated from feedback where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+		<if test="pid != null and pid != '' ">  
+       		and pid = #{pid}
+		</if>
+		<if test="adid != null and adid != '' ">  
+        	and ad_id = #{adid}
+		</if>
+		group by thedate order by ${sortOrderBy} ${sortRule} limit ${limit}, ${offset}
+	</select>
+	
+	<select id="getFeedbackListInDateGroupByDeviceId" resultType="java.util.ArrayList" resultMap="feedbackMap" parameterType="map">
+		select dist(deviceid) as sum from feedbackred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+		<if test="pid != null and pid != '' ">  
+       		and pid = #{pid}
+		</if>
+		<if test="adid != null and adid != '' ">  
+        	and ad_id = #{adid}
+		</if>
+		<if test="col != null and col != '' ">  
+        	and ${col} > 0
+		</if>
+		group by 111 limit ${offset}, ${rows}
+	</select>
+	
+</mapper>

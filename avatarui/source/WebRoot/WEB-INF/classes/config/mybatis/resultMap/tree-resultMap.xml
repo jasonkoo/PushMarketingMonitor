@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace名字必须与Mapper接口名一致 -->
+<mapper namespace="cn.info.platform.mapper.TreeMapper">
+	<resultMap type="tree" id="treeMap">
+		<id property="treeID" column="id"/>
+		<result property="treeFID" column="fid"/>
+		<result property="treeName" column="name"/>
+		<result property="treeSort" column="sort"/>
+	</resultMap>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lenovo.lps.push.marketing.monitor.mapper.HitPvUvMapper">
+	<resultMap type="hitPvUv" id="hitPvUvMap">
+		<!-- <id property="id" column="id"/>  -->
+		<result property="thedate" column="thedate"/>
+		<result property="count" column="count"/>
+		<result property="sum" column="sum"/>
+		<result property="minute5" column="minute5"/>
+		<result property="hour" column="hour"/>
+		<result property="dim" column="dim"/>
+		<result property="dimSum" column="dimSum" />		
+	</resultMap>	
+
+</mapper>

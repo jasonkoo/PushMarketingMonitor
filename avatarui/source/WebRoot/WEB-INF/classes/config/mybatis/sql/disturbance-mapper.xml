@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- namespace名字必须与Mapper接口名一致 -->
+<mapper namespace="com.lenovo.push.marketing.lestat.db.mapper.DisturbanceMapper">
+	<insert id="insertDisturbanceResults" parameterType="List">
+		insert into disturbance(thedate, hit, users, inserttime) 
+		values 
+		<foreach collection="list" item="item" index="index" separator=",">
+		(#{item.thedate},#{item.hitCount},#{item.numUsers},#{item.ts})
+		</foreach>
+	</insert>
+	<select id="getDisturbanceResultsByDate" parameterType="map" resultType="java.util.ArrayList" resultMap="disturbanceMap">
+		SELECT thedate, hit, users FROM disturbance WHERE thedate =  #{thedate}   AND  
+		inserttime = (SELECT MAX(inserttime) FROM disturbance WHERE thedate= #{thedate}  )
+		order by hit limit #{limit}, #{offset}
+	</select>
+	<select id="getDisturbanceResultTotalByDate" parameterType="string" resultType="int">
+		SELECT count(*) FROM disturbance WHERE thedate =  #{thedate} AND  
+		inserttime = (SELECT MAX(inserttime) FROM disturbance WHERE thedate= #{thedate}  )
+	</select>
+</mapper>

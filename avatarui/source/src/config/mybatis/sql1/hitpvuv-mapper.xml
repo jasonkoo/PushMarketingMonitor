@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace名字必须与Mapper接口名一致 -->
+<mapper namespace="com.lenovo.lps.push.marketing.monitor.mapper.HitPvUvMapper">
+	<select id="pvuvList" resultType="java.util.ArrayList" resultMap="hitPvUvMap" >
+		select thedate,count(records) as count,sum(records) as sum  from hit group by thedate limit 0,20
+	</select>
+	<select id="getAllPv" resultType="java.util.ArrayList" resultMap="hitPvUvMap">
+		select sum(records) as sum from hit limit 0,1
+	</select>	
+	<select id="getAllUv" resultType="java.util.ArrayList" resultMap="hitPvUvMap">
+		select dist(pid) as sum from hit group by 111 limit 0,1 
+	</select>	
+	<select id="getPvByMinute5" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select miniute_5 as minute5,sum(records) as sum from hit where thedate = #{date}
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>	
+		 group by miniute_5 order by miniute_5 limit 0,300 
+	</select>		
+	<select id="getUvByMinute5" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select miniute_5 as minute5,dist(pid) as sum from hit where thedate = #{date}
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>	
+		 group by miniute_5 order by miniute_5 limit 0,300 
+	</select>	
+	<select id="getPvByDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate as thedate,sum(records) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+	    <if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		 group by thedate order by thedate
+		<if test="desc != null ">  
+        	desc  
+	    </if>
+		 limit 0,30 
+	</select>
+	<select id="getUvByDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate as thedate,dist(pid) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+				<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+	    <if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		 group by thedate order by thedate 
+		<if test="desc != null ">  
+        	desc  
+	    </if>
+		limit 0,30 
+	</select>
+		
+	<select id="getAllHitPv" resultType="java.util.ArrayList" resultMap="hitPvUvMap">
+		select sum(records) as sum from hit where result = '0' group by 111
+	</select>
+	<select id="getAllHitUv" resultType="java.util.ArrayList" resultMap="hitPvUvMap">
+		select dist(pid) as sum from hit where result = '0' group by 111
+	</select>
+	<select id="getHitPvByMinute5" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select miniute_5 as minute5,sum(records) as sum from hit where thedate = #{date} and result = '0' 
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		group by miniute_5 order by miniute_5 limit 0,300
+	</select>
+	<select id="getHitUvByMinute5" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select miniute_5 as minute5, dist(pid) as sum from hit where thedate = #{date} and result = '0' 
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		group by miniute_5 order by miniute_5 limit 0,300
+	</select>	
+	<select id="getHitPvByDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate as thedate, sum(records) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' 
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+	     <if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		group by thedate order by thedate 
+		<if test="desc != null ">  
+        	desc  
+	    </if>
+		limit 0,30
+	</select>
+	<select id="getHitUvByDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate as thedate, dist(pid) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' 
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+	     <if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		group by thedate order by thedate 
+		<if test="desc != null ">  
+        	desc  
+	    </if>
+		limit 0,30
+	</select>
+	
+	
+	<!-- pv group by Gu Lei-->
+	<select id="getPvListInDateRangeByDimension" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select ${dim} as dim, sum(records) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}  
+		<if test="keyword != null and keyword != ''">
+			and ${dim} like #{keyword}
+		</if>
+		<!--
+		<if test="result != null and result != ''">
+			and result = #{result}
+		</if> -->
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>		
+		group by ${dim} order by  ${sortOrderBy}  ${sortRule}  limit ${limit}, ${offset}
+	</select>
+	<select id="getPvTotalInDateRange" resultType="java.lang.Double" parameterType="map">
+		select sum(records) as total from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>		
+	</select>
+	<select id="getPvListForTrendData" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate, sum(records) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and ${dim} = #{dimVal} 
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>		
+		group by thedate order by thedate limit 0, ${offset}
+	</select>
+	
+	<!-- uv group by Gu Lei-->
+	<select id="getUvListInDateRangeByDimension" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select ${dim} as dim, dist(pid) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}  
+		<if test="keyword != null and keyword != ''">
+			and ${dim} like #{keyword}
+		</if>
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>		
+		group by ${dim} order by  ${sortOrderBy}  ${sortRule} limit ${limit}, ${offset}
+	</select>
+	<select id="getUvTotalInDateRange" resultType="java.lang.Double" parameterType="map">
+		select dist(pid) as total from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} 
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>	
+		group by 111 limit 0, 1
+	</select>
+	<select id="getUvListForTrendData"  resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate, dist(pid) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and ${dim} = #{dimVal} 
+		<if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>	
+		group by thedate order by thedate limit 0, ${offset}
+	</select>
+	
+	<!-- hit pv group by Gu Lei-->
+	<select id="getHitPvListInDateRangeByDimension" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select ${dim} as dim, sum(records) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' 
+		<if test="keyword != null and keyword != ''">
+			and ${dim} like #{keyword}
+		</if>
+		group by ${dim} order by ${sortOrderBy}  ${sortRule} limit ${limit}, ${offset}
+	</select>
+	<select id="getHitPvTotalInDateRange" resultType="java.lang.Double" parameterType="map">
+		select sum(records) as total from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0'
+	</select>
+	<select id="getHitPvListForTrendData"  resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate, sum(records) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' and ${dim} = #{dimVal} group by thedate order by thedate limit 0, ${offset}
+	</select>
+	
+	<!-- hit uv group by Gu Lei-->
+	<select id="getHitUvListInDateRangeByDimension" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select ${dim} as dim, dist(pid) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}  and result = '0' 
+		<if test="keyword != null and keyword != ''">
+			and ${dim} like #{keyword}
+		</if>
+		group by ${dim} order by ${sortOrderBy} ${sortRule} limit ${limit}, ${offset}
+	</select>
+	<select id="getHitUvTotalInDateRange" resultType="java.lang.Double" parameterType="map">
+		select dist(pid) as total from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' group by 111 limit 0, 1
+	</select>
+	<select id="getHitUvListForTrendData"  resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate, dist(pid) as dimSum from hitred where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' and ${dim} = #{dimVal} group by thedate order by thedate limit 0, ${offset}
+	</select>
+	
+	<select id="getUvByHourAndDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="String">
+		select hour as hour,dist(pid) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} 
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+	    <if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		group by hour order by hour limit 0,24 
+	</select>
+	<select id="getPvByHourAndDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="String">
+		select hour as hour,sum(records) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} 
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+	    <if test="resultList != null">
+			and result in   
+		     <foreach collection="resultList" item="item"  open="(" separator="," close=")">  
+		        #{item}  
+		     </foreach>  
+		</if>
+		group by hour order by hour limit 0,24
+	</select>
+	<select id="getHitPvByHourAndDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="String">
+		select hour as hour,sum(records) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' 
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+		group by hour order by hour limit 0,24
+	</select>
+	<select id="getHitUvByHourAndDateRange" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="String">
+		select hour as hour, dist(pid) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result = '0' 
+		<if test="pid != null ">  
+        	and pid = #{pid}
+	    </if>
+	    <if test="adid != null ">  
+        	and ad_id = #{adid}
+	    </if>
+		group by hour order by hour limit 0,24
+	</select>
+	
+	<select id="getPvListByResult"  resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select result as dim, sum(records) as dimSum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} group by result order by dimSum desc limit #{limit}, #{offset} 
+	</select>
+	<select id="getUvListByResult"  resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select result as dim, dist(pid) as dimSum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} group by result order by dimSum desc limit #{limit}, #{offset} 
+	</select>
+	
+	<select id="getPvTotalInDateRangeTableHit" resultType="java.lang.Double" parameterType="map">
+		select sum(records) as total from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate}
+	</select>
+	<select id="getUvTotalInDateRangeTableHit" resultType="java.lang.Double" parameterType="map">
+		select dist(pid) as total from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} group by 111
+	</select>
+	<select id="pvListForTrendData" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate, sum(records) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result=#{result} group by thedate limit 0, #{offset} 
+	</select>
+	<select id="uvListForTrendData" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select thedate, dist(pid) as sum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} and result=#{result} group by thedate limit 0, #{offset} 
+	</select>
+	
+	<select id="getDisturbanceData" resultType="java.util.ArrayList" resultMap="hitPvUvMap" parameterType="map">
+		select pid as dim,sum(records) as dimSum from hit where thedate &gt;= #{startDate} and thedate &lt;= #{endDate} 
+		<if test="result != null ">  
+        	and result= #{result} 
+	    </if>
+		group by pid order by dimSum desc limit #{offset}, #{rows}
+	</select>
+</mapper>

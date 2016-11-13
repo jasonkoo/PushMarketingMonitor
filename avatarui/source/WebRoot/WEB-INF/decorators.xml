@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+    
+    <excludes>
+        <pattern>/index.jsp</pattern>       
+        <pattern>/exclude/*</pattern>
+    </excludes>
+        
+    <decorator name="basic-theme" page="basic-theme.jsp">
+        <pattern>/*.jsp</pattern>
+    </decorator>
+    
+ 
+    <decorator name="header" page="header.jsp" />    
+    <decorator name="leftSide" page="leftSide.jsp" />
+    <decorator name="footer" page="footer.jsp" />    
+</decorators>

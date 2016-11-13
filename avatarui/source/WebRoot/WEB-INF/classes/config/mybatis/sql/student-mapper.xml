@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace名字必须与Mapper接口名一致 -->
+<mapper namespace="cn.info.platform.mapper.StudentMapper">
+	<select id="studentAll" resultType="java.lang.Integer" >
+		SELECT count(*) FROM student 
+	</select>
+	
+	<select id="studentList" resultType="java.util.ArrayList" resultMap="studentMap" >
+		select * from student
+		<trim prefix="order by" suffixOverrides="AND|OR" >
+			<if test="sortOrderBy != null" >
+				${sortOrderBy} ${sortRule} 
+			</if>
+		</trim>
+		LIMIT ${limit},${offset}
+	</select>
+	
+	<insert id="insert" parameterType="cn.info.platform.entity.Student" useGeneratedKeys="true" keyProperty="id" >
+	    insert into student (id, name, email, score, date)
+	    values (
+		    #{id,jdbcType=BIGINT}, 
+		    #{name,jdbcType=VARCHAR}, 
+		    #{email,jdbcType=VARCHAR}, 
+		    #{score,jdbcType=BIGINT}, 
+		    #{date,jdbcType=DATE}
+	    )
+	 </insert>
+	
+	
+</mapper>

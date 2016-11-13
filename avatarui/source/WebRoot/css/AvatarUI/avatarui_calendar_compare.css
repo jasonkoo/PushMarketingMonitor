@@ -1,0 +1,130 @@
+/**
+ * AvatarUI-����
+ * @version	v2.0.1
+ * @author	Rocky(296456018@qq.com)
+ * @date	2013-04-25
+ */
+
+/*------ calendar start ------*/
+.calendarCompare{ width:185px; margin-top:8px; padding:3px; background:url("../../images/calendar/calendar_bg.png") no-repeat scroll 162px center #DCEEFC; border:1px solid #AEC6E0; cursor:pointer;
+border-radius: 3px;
+}
+
+
+.calendarCompare input{ width:160px; height:16px;
+background:none;
+
+padding:0;
+line-height:16px; font-family:Tahoma; font-size:12px;
+-webkit-box-shadow: none; 
+box-shadow:none;
+border:none;
+transition:none;
+
+cursor:pointer
+}
+.calendarCompare input:focus{box-shadow:none;
+border:none;
+transition:none}
+
+.calendarCompareActive{width:250px; margin-top:-8px; background-position:228px center;}
+.calendarCompareActive input.originDate{ width:225px; height:18px; font-size:18px;}
+.calendarCompareActive label{float:left; width:65px; line-height:22px;}
+.calendarCompareActive input.compareDate{float:left; height:22px; line-height:22px;}
+.calendarCompareActive .compareDateWrap{}
+
+.calendarCompareWrapper{ position:absolute; z-index:2147483647; background:#fff;
+-moz-box-shadow: 2px 2px 0px #ccc;
+-webkit-box-shadow: 2px 2px 0px #ccc;
+-khtml-box-shadow: 2px 2px 0px #ccc;
+-ms-box-shadow: 2px 2px 0px #ccc;
+filter: progid:DXImageTransform.Microsoft.Shadow(direction = 155, Color = #dadada, Strength = 3), progid:DXImageTransform.Microsoft.DropShadow(Color = #22aaaaaa, OffX = 0, OffY = 0);    
+border:1px solid #9BC0E0; font-size:12px; font-family:Tahoma; line-height:20px; color:#444; overflow:hidden; text-align:center;
+-webkit-box-shadow: 0px 0px 5px 0px #333; 
+box-shadow: 0px 0px 5px 0px #333;
+
+}
+.calendarCompareWrapper a{ color:#008fd2; text-decoration:underline;}
+.calendarCompareWrapper .calendarCompareCon{ float:left; height:180px; overflow:hidden; background: #fff;}
+.calendarCompareWrapper .calendarCompareCon .monthItem{ position:relative; display:inline-block; *display:inline; *zoom:1; vertical-align:top; width:168px; margin:4px; }
+
+.calendarCompareWrapper .caption{ height:24px; background:linear-gradient(top, #68B8FF, #249CFF); background: -moz-linear-gradient(top, #68B8FF, #249CFF); background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#68B8FF), to(#249CFF)); background:#3CA5FF\0; *background:#3CA5FF; _background:#3CA5FF; color:#fff;}
+.calendarCompareWrapper .caption div{ display:inline-block; *display:inline; *zoom:1; vertical-align:top;}
+.calendarCompareWrapper .caption div a{ display:inline-block; width:20px; height:24px; line-height:24px; color:#fff; font-family:Lucida Grande; text-decoration:none;}
+.calendarCompareWrapper .caption a.monthName{ width:72px;}
+.calendarCompareWrapper .caption a.monthName:hover{text-decoration:underline; color:#f0ff00;}
+
+.calendarCompareWrapper .weekName{ padding:4px 0;}
+.calendarCompareWrapper .weekName span{ display:inline-block; width:24px; heigth:20px; background:#CCE7FF; line-height:20px; font-weight:normal;}
+
+.calendarCompareCon table .day{ display:block; width:24px; height:20px; color:#8C8C8C; text-decoration:none; cursor:default;}
+.calendarCompareCon table .nexMonth, .calendarCompareWrapper .calendarCompareCon table .lastMonth{ background:#fff; color:#fff;}
+.calendarCompareCon table .toMonth{ color:#004499; cursor:pointer;} 
+.calendarCompareCon table .toMonthHover{ background:#ebf4fc; }
+.calendarCompareCon table .checked{ background:#CCE7FF;}
+.calendarCompareCon table .checkedCompare{ background:#fc3;}
+.calendarCompareCon table .checkedCompareCross{ background:#00B1AB;}
+
+
+.calendarCompareWrapper .selectList{ position:relative; padding:2px 10px; background:#fff;}
+.calendarCompareWrapper .selectListYear{ background:#f8f8f8; border-top:1px dashed #ccc;}
+.calendarCompareWrapper .selectList a{ display:inline-block; width:35px; height:24px; line-height:24px; color:#333; text-decoration: none; }
+.calendarCompareWrapper .selectList a.hover{ background:#E2F7FE; text-decoration: none;}
+.calendarCompareWrapper .selectList a.selected{ background:#B4E9FD;}
+.calendarCompareWrapper .selectList a.prevA{ position:absolute; left:0; top:20px; width:16px; height:16px; line-height:16px; color:#2A9EFF; font-weight:bold; font-family:Lucida Grande; text-decoration:none; text-align:center;}
+.calendarCompareWrapper .selectList a.nextA{ position:absolute; right:0; top:20px; width:16px; height:16px; line-height:16px; color:#2A9EFF; font-weight:bold; font-family:Lucida Grande; text-decoration:none; text-align:center;}
+
+.calendarCompareWrapper .selectList a.prevA:hover, .calendarCompareWrapper .selectList a.nextA:hover{ background:#fff; color:#111;}
+
+.calendarCompareWrapper .selectPanel{ display:none; position:absolute; top:-3px; left:-3px; width:174px; height:170px;}
+.calendarCompareWrapper .selectPanelTop{ width:174px; height:25px; background:#eee; line-height:25px; text-align:center;}
+.calendarCompareWrapper .selectPanel .botBtn{ height:25px; background:#ddd; }
+
+.calendarControl{float:left; width:200px; height:170px; padding:8px; background:#f6f6f6; text-align: left;}
+.calendarControl li{ padding:3px 0;}
+.calendarControl input.text{
+	padding:0 2px;
+	width: 80px;
+	height: 22px;
+	line-height: 22px;
+	background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #A3A3A3 #CCCCCC #CCCCCC #A3A3A3;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 1px 0 #D6D6D6 inset;
+    color: #333;
+    margin:1px;
+    font: 12px arial;
+    padding-left:3px;
+    vertical-align: middle;
+    transition:none;
+}
+
+.calendarControl input.textDefault{ border:1px solid #ddd; color:#aaa;}
+
+.calendarControl input.textActive{ margin:0; border:2px solid #0077CC;}
+.calendarControl .compareDate input.textActive{ margin:0;  border:2px solid #fc3;}
+
+.calendarControl select{ height:22px; line-height:22px; background: #FFFFFF; border: 1px solid #9A9A9A; color: #000000; font-size:12px;}
+.calendarControl select.disabled{border:1px solid #ddd; color:#aaa;}
+
+.calendarControl .btnPrimary{margin-right:15px;}
+.calendarControl .compareSwitch{margin-right:3px; vertical-align: middle;}
+
+.calendarControl .compareDate{display: none}
+
+.calendarControl .operate{margin-top:10px; padding:0; border-top:1px solid #ddd;}
+.calendarControl .operateCon{padding-top:5px; border-top:1px solid #fff;}
+
+/*------ calendar end ------*/
+
+
+.yearInterval{width:120px;height:25px;float:right;}
+.monthInterval{width:190px;height:25px;float:left;}
+.monthInterval a{display:block;float:left;padding:0 2px;margin:2px;margin-right:1px;text-decoration:none;cursor:pointer;}
+.yearInterval a{display:block;float:left;text-decoration:none;cursor:pointer;width:38px;line-height:20px;margin-top:3px;padding:0;height:20px;text-align:center;}
+.monthInterval a.active, .yearInterval a.active{background:#0077cc;color:#fff;}
+.monthInterval a:hover, .yearInterval a:hover{background:#0077bb;color:#fff;}
+.yearInterval .yearMiddle{position:absolute;left:0;top:0;height:25px;margin:0;}
+.yearInterval .yearLeftBtn,.yearInterval .yearRightBtn{float:left;font-family: Lucida Grande;line-height:27px;width:20px;margin-top:1px;color:#008FD2;text-align:center;cursor:pointer;}
+.yearInterval .btnsReadonly,.monthInterval .btnsReadonly{color:#ddd;cursor:text;}
